@@ -13,7 +13,7 @@ tag: oracle
 * content
 {:toc}
 
-修改进程数和连接数 {#1}
+修改进程数和连接数
 ---------------------
 ```sql
 -- processes
@@ -21,7 +21,8 @@ alter system set processes=1000 scope=spfile;
 -- sessions
 alter system set sessions=1200 scope=spfile;
 ```
-禁止sql tuning advisor  {#2}
+
+禁止sql tuning advisor
 ---------------------
 ```sql
 begin
@@ -34,18 +35,21 @@ begin
 end;
 /
 ```
-创建好数据库后，将参数deferred_segment_creation改成FALSE  {#3}
+
+创建好数据库后，将参数deferred_segment_creation改成FALSE
 ---------------------
 ```sql
 alter system set deferred_segment_creation=FALSE scope=both;
 ```
-关闭审计，同时删除已有的审计信息  {#4}
+
+关闭审计，同时删除已有的审计信息
 ---------------------
 ```sql
 alter system set audit_trail=none scope=spfile;
 truncate table aud$;
 ```
-增加日志组文件，提高IO能力  {#5}
+
+增加日志组文件，提高IO能力
 ---------------------
 ```sql
 alter database add logfile group 4 ( '/home/oracle/oracle/oradata/ora11g/redo04_1.log') size 1024m;
